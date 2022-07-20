@@ -1,7 +1,7 @@
 # Uses snippets from:
 # - https://docs.github.com/en/actions/quickstart
 # - https://docs.github.com/en/actions/managing-issues-and-pull-requests/commenting-on-an-issue-when-a-label-is-added
-name: GitHub Actions Demo
+name: Question Detector
 on:
   issues:
     types:
