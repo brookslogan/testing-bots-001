@@ -1,0 +1,15 @@
+# Uses snippets from:
+# - https://docs.github.com/en/actions/quickstart
+# - https://docs.github.com/en/actions/managing-issues-and-pull-requests/commenting-on-an-issue-when-a-label-is-added
+name: GitHub Actions Demo
+on:
+  issues:
+    types:
+      - labeled
+jobs:
+  Test-Run-On-Particular-Issue-Label:
+    if: github.event.label.name == 'question'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🍏 This job's status is ${{ job.status }}."
