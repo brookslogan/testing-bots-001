@@ -10,7 +10,7 @@ on:
   # TODO add cron schedule here + add issue opener workflow (that warns about DST issues)
 
 jobs:
-  Label-Questions-as-Stale-and-Close:
+  Label-Questions-as-Stale:
     runs-on: ubuntu-latest
     steps:
      - id: stale_labeler
@@ -29,4 +29,4 @@ jobs:
          stale-issue-message: 'this is the stale issue message'
      - id: stale_messager
        # from https://github.com/actions/stale/blob/main/.github/workflows/stale.yml
-       run: echo ${{ join(steps.stale.outputs.*, ',') }}
+       run: echo ${{ join(steps.stale_labeler.outputs.*, ',') }}
