@@ -29,9 +29,9 @@ jobs:
          only-issue-labels: 'question'
          stale-issue-message: 'this is the stale issue message'
      - id: stale_messager1
-       if: join(steps.stale_labeler.outputs, ",") == "{},{}"
+       if: join(steps.stale_labeler.outputs, ',') == "{},{}"
        run: echo "Looks like no issues/PRs were made stale."
      - id: stale_messager2
-       if: join(steps.stale_labeler.outputs, ",") != "{},{}"
+       if: join(steps.stale_labeler.outputs, ',') != "{},{}"
        run: echo "Looks like one or more issues/PRs were made stale."
        
