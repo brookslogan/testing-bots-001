@@ -34,4 +34,5 @@ jobs:
      - id: stale_messager2
        if: join(steps.stale_labeler.outputs, ',') != '{},{}'
        run: echo "Looks like one or more issues/PRs were made stale."
+     - run: echo ${{ join(steps.stale_labeler.outputs, ';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;') }}
        
