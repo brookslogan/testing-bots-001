@@ -1,4 +1,9 @@
 name: 'Label Questions as Stale'
+
+permissions:
+  # XXX not sure what all this entails, but there doesn't seem to be something to limit to issue reading+labeling+commenting
+  issues: write
+
 on:
   # manual button press:
   workflow_dispatch:
