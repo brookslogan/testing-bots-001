@@ -13,6 +13,7 @@ on:
 jobs:
   Label-Questions-as-Stale:
     runs-on: ubuntu-latest
+    environment: TestEnvironment001
     steps:
      - id: stale_labeler
        # https://blog.gitguardian.com/github-actions-security-cheat-sheet/ recommends using commit hashes to avoid supply-chain attacks
@@ -28,11 +29,8 @@ jobs:
          # XXX not sure if this filters issues+PRs down to issues with this label VS. only filters issues -> issues with this label and keeps all PRs
          only-issue-labels: 'question'
          stale-issue-message: 'this is the stale issue message'
-     - id: stale_messager1
-       if: join(steps.stale_labeler.outputs.*, ',') == '[],[]'
-       run: echo "Looks like no issues/PRs were made stale."
-     - id: stale_messager2
-       if: join(steps.stale_labeler.outputs.*, ',') != '[],[]'
-       run: echo "Looks like one or more issues/PRs were made stale."
-     - run: echo ${{ join(steps.stale_labeler.outputs.*, ',') }}
+     - name: Print actions/stale outputs
+       run: echo ${{ join(steps.stale_labeler.outputs.*, ',') }}
+     - if: join(steps.stale_labeler.outputs.*, ',') != '[],[]'
+       run: echo ${{ secrets.TEST_SECRET }}
        
