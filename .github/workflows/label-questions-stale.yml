@@ -29,9 +29,9 @@ jobs:
          only-issue-labels: 'question'
          stale-issue-message: 'this is the stale issue message'
      - id: stale_messager1
-       if: toJSON(steps.stale_labeler.outputs["staled-issues-prs"]) == "[]"
-       run: echo "Looks like no issues were made stale."
+       if: toJSON(steps.stale_labeler.outputs.staled-issues-prs) == "[]"
+       run: echo "Looks like no issues/PRs were made stale."
      - id: stale_messager2
-       if: toJSON(steps.stale_labeler.outputs["staled-issues-prs"]) != "[]"
-       run: echo "Looks like one or more issues were made stale."
+       if: toJSON(steps.stale_labeler.outputs.staled-issues-prs) != "[]"
+       run: echo "Looks like one or more issues/PRs were made stale."
        
