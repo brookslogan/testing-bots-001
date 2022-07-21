@@ -28,11 +28,10 @@ jobs:
          days-before-close: -1
          # XXX not sure if this filters issues+PRs down to issues with this label VS. only filters issues -> issues with this label and keeps all PRs
          only-issue-labels: 'question'
-         stale-issue-message: 'this is the stale issue message'
-     - name: Print actions/stale outputs
+         stale-issue-message: 'Marking this question as stale.  This should also trigger a related Slack workflow.'
+     - name: Print outputs of `actions/stale`
        run: echo ${{ join(steps.stale_labeler.outputs.*, ',') }}
-     - name: Test acting on a secret
-       run: echo ${{ secrets.TEST_SECRET }}
-     - if: join(steps.stale_labeler.outputs.*, ',') != '[],[]'
-       run: echo ${{ secrets.TEST_SECRET }}
+     - name: Run notification webhook if `actions/stale` appears to have labeled or closed anything
+       if: join(steps.stale_labeler.outputs.*, ',') != '[],[]'
+       run: curl --request POST ${{ secrets.STALE_QUESTION_NOTIFY_WEBHOOK }}
        
