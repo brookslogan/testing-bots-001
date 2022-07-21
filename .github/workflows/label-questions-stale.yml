@@ -13,7 +13,7 @@ jobs:
   Label-Questions-as-Stale-and-Close:
     runs-on: ubuntu-latest
     steps:
-     - id: step1
+     - id: stale_labeler
        # https://blog.gitguardian.com/github-actions-security-cheat-sheet/ recommends using commit hashes to avoid supply-chain attacks
        # FIXME but what about security patches?
        # 
@@ -26,6 +26,7 @@ jobs:
          days-before-close: -1
          # XXX not sure if this filters issues+PRs down to issues with this label VS. only filters issues -> issues with this label and keeps all PRs
          only-issue-labels: 'question'
-         stale-issue-message: ''
-         # TODO conditional webhook step based on step1 outputs/status/???
-       
+         stale-issue-message: 'this is the stale issue message'
+     - id: stale_messager
+       # from https://github.com/actions/stale/blob/main/.github/workflows/stale.yml
+       run: echo ${{ join(steps.stale.outputs.*, ',') }}
