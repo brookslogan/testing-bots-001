@@ -1,5 +1,6 @@
 name: 'Label Questions as Stale'
 
+# use narrower default job permissions
 permissions:
   # XXX not sure what all this entails, but there doesn't seem to be something to limit to issue reading+labeling+commenting
   issues: write
@@ -28,5 +29,4 @@ jobs:
          only-issue-labels: 'question'
          stale-issue-message: 'this is the stale issue message'
      - id: stale_messager
-       # from https://github.com/actions/stale/blob/main/.github/workflows/stale.yml
-       run: echo ${{ join(steps.stale_labeler.outputs.*, ',') }}
+       run: echo ${{ toJSON(steps.stale_labeler.outputs) }}
