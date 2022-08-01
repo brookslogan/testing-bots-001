@@ -19,7 +19,7 @@ jobs:
        # https://blog.gitguardian.com/github-actions-security-cheat-sheet/ recommends using commit hashes to avoid supply-chain attacks
        # FIXME but what about security patches?
        # 
-       # FIXME but if there is a rewrite&force-push or some other breakage?  How do we effectively ping people to see?
+       # FIXME but if there is a rewrite&force-push or some other breakage?  How do we effectively ping people to see? --- We can fork to ensure this commit stays around.
        uses: actions/stale@532554b8a8498a0e006fbcde824b048728c4178f
        with:
          # idea is to have cron run this only at points where the "questions" (actually, scheduled tasks) will be stale.
