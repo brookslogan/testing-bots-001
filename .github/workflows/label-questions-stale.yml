@@ -21,6 +21,8 @@ jobs:
        # 
        # FIXME but if there is a rewrite&force-push or some other breakage?  How do we effectively ping people to see? --- We can fork to ensure this commit stays around.
        uses: actions/stale@532554b8a8498a0e006fbcde824b048728c4178f
+       # TODO instead, or in addition, have something that checks whether the csv actually was merged into the reichlab repo.
+       # TODO add a if: failure() backup notification step
        with:
          # idea is to have cron run this only at points where the "questions" (actually, scheduled tasks) will be stale.
          # OR fractional days + frequent runs, and just hope for no queueing delays on the issue opener workflow?
