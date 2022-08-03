@@ -35,8 +35,9 @@ jobs:
        run: echo ${{ join(steps.stale_labeler.outputs.*, ',') }}
      - name: Run notification webhook if `actions/stale` appears to have labeled or closed anything
        if: join(steps.stale_labeler.outputs.*, ',') != '[],[]'
-       # FIXME: try to avoid passing this via command line at all
+       # FIXME: try to avoid passing this secret via command line at all
        env:
          SECRET_STALE_QUESTION_NOTIFY_WEBHOOK: ${{ secrets.STALE_QUESTION_NOTIFY_WEBHOOK }}
-       run: curl --request POST "$SECRET_STALE_QUESTION_NOTIFY_WEBHOOK"
+       # not sure what all curl can output; use --silent and &> /dev/null to not overly rely on GitHub's scrubbing
+       run: curl --silent --request POST "$SECRET_STALE_QUESTION_NOTIFY_WEBHOOK" &> /dev/null
        
