@@ -43,5 +43,4 @@ jobs:
        env:
          SECRET_STALE_QUESTION_NOTIFY_WEBHOOK: ${{ secrets.STALE_QUESTION_NOTIFY_WEBHOOK }}
        run: ./.github/scripts/notify-about-stale-questions.sh
-       shell: bash
 
