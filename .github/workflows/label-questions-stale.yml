@@ -18,8 +18,10 @@ jobs:
      - id: stale_labeler
        # https://blog.gitguardian.com/github-actions-security-cheat-sheet/ recommends using commit hashes to avoid supply-chain attacks
        # FIXME but what about security patches?
-       # 
-       # FIXME but if there is a rewrite&force-push or some other breakage?  How do we effectively ping people to see? --- We can fork to ensure this commit stays around.
+       #
+       # TODO but if there is a rewrite&force-push or some other breakage?  How do we effectively ping people to see?
+       # - We can fork to ensure this commit stays around to avoid.
+       # - We can use an if: failure() backup notification, which is a good idea regardless.
        uses: actions/stale@532554b8a8498a0e006fbcde824b048728c4178f
        # TODO instead, or in addition, have something that checks whether the csv actually was merged into the reichlab repo.
        # TODO add a if: failure() backup notification step
@@ -37,5 +39,6 @@ jobs:
        if: join(steps.stale_labeler.outputs.*, ',') != '[],[]'
        env:
          SECRET_STALE_QUESTION_NOTIFY_WEBHOOK: ${{ secrets.STALE_QUESTION_NOTIFY_WEBHOOK }}
-       run: ./notify-about-stale-questions.sh
-       
+       run: ./.github/scripts/notify-about-stale-questions.sh
+       shell: bash
+
