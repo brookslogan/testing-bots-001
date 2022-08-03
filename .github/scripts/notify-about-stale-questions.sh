@@ -16,4 +16,4 @@ echo "but not to output anything further."
 # FIXME --fail can have some things slip through, according to curl docs.
 # --fail-with-body doesn't appear to have the same issues, but is new and isn't
 # recognized on ubuntu-latest at time of writing.
-curl --fail --location --request POST "$SECRET_STALE_QUESTION_NOTIFY_WEBHOOK"
+curl --silent --fail --location --request POST "$SECRET_STALE_QUESTION_NOTIFY_WEBHOOK" &> /dev/null
