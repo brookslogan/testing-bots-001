@@ -15,13 +15,16 @@ jobs:
     runs-on: ubuntu-latest
     environment: TestEnvironment001
     steps:
-     - id: stale_labeler
+     - name: Checkout this repo for script
        # https://blog.gitguardian.com/github-actions-security-cheat-sheet/ recommends using commit hashes to avoid supply-chain attacks
        # FIXME but what about security patches?
        #
        # TODO but if there is a rewrite&force-push or some other breakage?  How do we effectively ping people to see?
        # - We can fork to ensure this commit stays around to avoid.
        # - We can use an if: failure() backup notification, which is a good idea regardless.
+       uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+     - name: Label stale issues
+       id: stale_labeler
        uses: actions/stale@532554b8a8498a0e006fbcde824b048728c4178f
        # TODO instead, or in addition, have something that checks whether the csv actually was merged into the reichlab repo.
        # TODO add a if: failure() backup notification step
