@@ -35,6 +35,8 @@ jobs:
        run: echo ${{ join(steps.stale_labeler.outputs.*, ',') }}
      - name: Run notification webhook if `actions/stale` appears to have labeled or closed anything
        if: join(steps.stale_labeler.outputs.*, ',') != '[],[]'
-       # FIXME: should this be referenced via an environment variable?  It does seem to be scrubbed from the logs as is, but check whether env vars are preferred.
-       run: curl --request POST ${{ secrets.STALE_QUESTION_NOTIFY_WEBHOOK }}
+       # FIXME: try to avoid passing this via command line at all
+       env:
+         SECRET_STALE_QUESTION_NOTIFY_WEBHOOK: ${{ secrets.STALE_QUESTION_NOTIFY_WEBHOOK }}
+       run: curl --request POST "$SECRET_STALE_QUESTION_NOTIFY_WEBHOOK"
        
